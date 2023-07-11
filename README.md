@@ -20,3 +20,8 @@
     }
   }
   ```
+- After completing the above steps execute the following command inside `src/folder` of the project
+  ```
+  npx sequelize db:create
+  npx sequelize db:migrate
+  ```
