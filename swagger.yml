@@ -1,0 +1,213 @@
+openapi: 3.0.0
+info:
+  title: Flight Management System
+  description: |-
+    # Flight And Search Service
+
+    ## Setup
+
+    - Clone the project on your local machine
+    - Execute `npm install` in root directory of the project
+    - Create `.env` file in the root directory of the project and add the following:
+
+      ```
+      PORT=3000
+      ```
+
+    - Now create another file name `config.json` inside `src/config` folder and add the following content to it:
+
+      ```json
+      {
+        "development": {
+          "username": <YOUR_DB_USER_NAME>,
+          "password": <YOUR_DB_PASSWORD>,
+          "database": "Flights_Search_DB_Dev",
+          "host": "127.0.0.1",
+          "dialect": "mysql"
+        }
+      }
+      ```
+
+    - After completing the above steps execute the following command inside `src/folder` of the project
+
+      ```
+      npx sequelize db:create
+      npx sequelize db:migrate
+      ```
+
+    ## DB Design
+
+    - Airplane Table
+    - Flight
+    - Airport
+    - City
+
+    - A flight belongs to an airplane but one airplane can be used in multiple flights
+    - A city has many airports but one airport belongs to a city
+    - One airport can have many flights, but a flight belongs to one airport
+
+    ## Tables
+
+    ### City Table
+
+    | id  | name | created_at | updated_at |
+    | --- | ---- | ---------- | ---------- |
+
+    ### Airport Table
+
+    | id  | name | address | city_id | created_at | updated_at |
+    | --- | ---- | ------- | ------- | ---------- | ---------- |
+
+        Relationship -> City has many airports and Airport belongs to a city (one to many)
+    # API Blueprint
+  version: 0.1.9
+servers:
+  - url: http://localhost:3000/api/v1/
+    description: Development (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+paths:
+  /city:
+    post:
+      tags:
+        - city
+      summary: Add a new city
+      description: Adds a new city to database
+      requestBody:
+        required: true
+        description: Add a new city to the database
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: integer
+                  example: delhi
+      responses:
+        "201": # status code
+          description: Successfully created a city
+          content:
+            application/json:
+              schema:
+                type: object
+                example: |-
+                  {
+                    "data": {
+                      "id": 12,
+                      "name": "delhi",
+                      "updatedAt": "2023-07-12T17:21:47.090Z",
+                      "createdAt": "2023-07-12T17:21:47.090Z"
+                    },
+                    "success": true,
+                    "message": "Successfully created a city",
+                    "err": {}
+                  }
+  /city/{id}:
+    get:
+      tags:
+        - city
+      summary: Find city by ID
+      description: returns a existing city
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of city to return
+          schema:
+            type: integer
+            minimum: 1
+            example: 4
+      responses:
+        "201": # status code
+          description: Successfully fetched a city
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  {
+                    "data":
+                      {
+                        "id": 12,
+                        "name": "delhi",
+                        "createdAt": "2023-07-12T17:21:47.000Z",
+                        "updatedAt": "2023-07-12T17:21:47.000Z",
+                      },
+                    "success": true,
+                    "message": "Successfully fetched a city",
+                    "err": {},
+                  }
+    patch:
+      tags:
+        - city
+      summary: Updates an existing city
+      description: Updates an existing city
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of city to update
+          schema:
+            type: integer
+            minimum: 1
+            example: 4
+      requestBody:
+        required: true
+        description: Updates an existing city
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: new delhi
+      responses:
+        "201": # status code
+          description: Successfully updated a city
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  {
+                    "data":
+                      {
+                        "id": 12,
+                        "name": "new delhi",
+                        "createdAt": "2023-07-12T17:21:47.000Z",
+                        "updatedAt": "2023-07-12T17:31:04.300Z",
+                      },
+                    "success": true,
+                    "message": "Successfully updated a city",
+                    "err": {},
+                  }
+    delete:
+      tags:
+        - city
+      summary: Delete a city by ID
+      description: Deletes an existing city
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of city to delete
+          schema:
+            type: integer
+            minimum: 1
+            example: 4
+      responses:
+        "201": # status code
+          description: Successfully deleted a city
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  {
+                    "data": true,
+                    "success": true,
+                    "message": "Successfully deleted a city",
+                    "err": {},
+                  }
