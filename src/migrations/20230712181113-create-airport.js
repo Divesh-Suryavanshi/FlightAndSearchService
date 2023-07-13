@@ -19,22 +19,24 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      city_id: {
+      cityId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
           model: "Cities",
           key: "id",
-          as: "city_id",
+          as: "cityId",
         },
       },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
+        allowNull: false,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
   },
