@@ -26,6 +26,7 @@ module.exports = {
           model: "Cities",
           key: "id",
           as: "cityId",
+          onDelete: "CASCADE",
         },
       },
       createdAt: {
