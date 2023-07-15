@@ -1,57 +1,29 @@
+const { Op } = require("sequelize");
+
+const CrudService = require("./crud-service");
 const { CityRepository } = require("../repository/");
 
-class CityService {
-  constructor() {
-    this.cityRepository = new CityRepository();
-  }
-  async createCity(data) {
-    try {
-      const city = await this.cityRepository.createCity({ name: data.name });
-      return city;
-    } catch (error) {
-      console.log("something went wrong at service layer");
-      throw { error };
-    }
-  }
+const repository = new CityRepository();
 
-  async deleteCity(cityId) {
-    try {
-      const response = await this.cityRepository.deleteCity(cityId);
-      return response;
-    } catch (error) {
-      console.log("something went wrong at service layer");
-      throw { error };
-    }
-  }
+class CityService extends CrudService {
+  createFilter(data) {
+    let filter = {};
 
-  async updateCity(cityId, data) {
-    try {
-      const city = await this.cityRepository.updateCity(cityId, data);
-      return city;
-    } catch (error) {
-      console.log("something went wrong at service layer");
-      throw { error };
-    }
-  }
-  async getCity(cityId) {
-    try {
-      const city = await this.cityRepository.getCity(cityId);
-      return city;
-    } catch (error) {
-      console.log("something went wrong at service layer");
-      throw { error };
-    }
-  }
-  async getAllCities(filter) {
-    try {
-      const cities = await this.cityRepository.getAllCities({
-        name: filter.name,
+    if (data.name) {
+      Object.assign(filter, {
+        where: {
+          name: {
+            [Op.startsWith]: data.name,
+          },
+        },
       });
-      return cities;
-    } catch (error) {
-      console.log("Something went wrong at service layer");
-      throw { error };
     }
+
+    return filter;
+  }
+
+  constructor() {
+    super(repository);
   }
 }
 
