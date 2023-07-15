@@ -16,8 +16,7 @@ class CrudRepository {
   async update(modelId, data) {
     try {
       const model = await this.model.findByPk(modelId);
-      model.update(data);
-      await model.save();
+      await model.update(data);
       return model;
     } catch (error) {
       console.log("Something went wrong at repository layer");
@@ -25,7 +24,7 @@ class CrudRepository {
     }
   }
 
-  async delete(modelId) {
+  async destroy(modelId) {
     try {
       await this.model.destroy({
         where: {
