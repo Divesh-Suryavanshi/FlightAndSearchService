@@ -31,7 +31,6 @@ class CityRepository {
   async updateCity(cityId, data) {
     try {
       const city = await City.findByPk(cityId);
-      console.log(`city id is ${cityId}`);
       await city.update({ name: data.name });
       await city.save();
       return city;

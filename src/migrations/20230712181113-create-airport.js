@@ -22,11 +22,11 @@ module.exports = {
       cityId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        onDelete: "CASCADE",
         references: {
           model: "Cities",
           key: "id",
           as: "cityId",
-          onDelete: "CASCADE",
         },
       },
       createdAt: {

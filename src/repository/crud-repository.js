@@ -5,7 +5,7 @@ class CrudRepository {
 
   async create(data) {
     try {
-      const response = model.create(data);
+      const response = await model.create(data);
       return response;
     } catch (error) {
       console.log("Something went wrong at repository layer");
@@ -15,7 +15,7 @@ class CrudRepository {
 
   async update(modelId, data) {
     try {
-      const model = model.findByPk(modelId);
+      const model = await model.findByPk(modelId);
       model.update(data);
       await model.save();
       return model;
@@ -27,8 +27,12 @@ class CrudRepository {
 
   async delete(modelId) {
     try {
-      const response = model.destroy(modelId);
-      return response;
+      await model.destroy({
+        where: {
+          id: modelId,
+        },
+      });
+      return true;
     } catch (error) {
       console.log("Something went wrong at repository layer");
       throw { error };
@@ -37,7 +41,7 @@ class CrudRepository {
 
   async get(modelId) {
     try {
-      const response = model.findByPk(modelId);
+      const response = await model.findByPk(modelId);
       return response;
     } catch (error) {
       console.log("Something went wrong at repository layer");
