@@ -4,17 +4,7 @@ class CrudService {
   }
   async create(data) {
     try {
-      const city = await this.repository.create(data);
-      return city;
-    } catch (error) {
-      console.log("something went wrong at service layer");
-      throw { error };
-    }
-  }
-
-  async destroy(cityId) {
-    try {
-      const response = await this.repository.destroy(cityId);
+      const response = await this.repository.create(data);
       return response;
     } catch (error) {
       console.log("something went wrong at service layer");
@@ -22,22 +12,34 @@ class CrudService {
     }
   }
 
-  async update(cityId, data) {
+  async destroy(modelId) {
     try {
-      const city = await this.repository.update(cityId, data);
-      return city;
+      const response = await this.repository.destroy(modelId);
+      return response;
     } catch (error) {
       console.log("something went wrong at service layer");
       throw { error };
     }
   }
-  async get(cityId) {
+
+  async update(modelId, data) {
     try {
-      const city = await this.repository.get(cityId);
-      return city;
+      const response = await this.repository.update(modelId, data);
+      return response;
+    } catch (error) {
+      console.log("something went wrong at service layer");
+      throw { error };
+    }
+  }
+  async get(modelId) {
+    try {
+      const response = await this.repository.get(modelId);
+      return response;
     } catch (error) {
       console.log("something went wrong at service layer");
       throw { error };
     }
   }
 }
+
+module.exports = CrudService;

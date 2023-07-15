@@ -6,7 +6,7 @@ const YAML = require("yaml");
 const file = fs.readFileSync("./swagger.yml", "utf8");
 const swaggerDocument = YAML.parse(file);
 
-const { CityController } = require("../../controllers");
+const { CityController, AirportController } = require("../../controllers");
 
 // swaggerDocs
 router.use("/docs", swaggerUi.serve);
@@ -17,5 +17,7 @@ router.patch("/city/:id", CityController.update);
 router.delete("/city/:id", CityController.destroy);
 router.get("/city/:id", CityController.get);
 router.get("/city", CityController.getAll);
+
+router.post("/airports", AirportController.create);
 
 module.exports = router;
