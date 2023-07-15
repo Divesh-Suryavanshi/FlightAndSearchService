@@ -77,9 +77,29 @@ const get = async (req, res) => {
   }
 };
 
+const getAll = async (req, res) => {
+  try {
+    const response = await service.getAll(req.query);
+    return res.status(201).json({
+      data: response,
+      success: true,
+      message: "successfully fetched all of the required airports",
+      err: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: "unable to fetch airports",
+      err: {},
+    });
+  }
+};
+
 module.exports = {
   create,
   update,
   destroy,
   get,
+  getAll,
 };
