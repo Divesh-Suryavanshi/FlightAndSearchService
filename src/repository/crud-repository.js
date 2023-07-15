@@ -47,6 +47,20 @@ class CrudRepository {
       throw { error };
     }
   }
+
+  async getAll(filter) {
+    try {
+      if (filter) {
+        const response = await this.model.findAll(filter);
+        return response;
+      }
+      const response = await this.model.findAll();
+      return response;
+    } catch (error) {
+      console.log("Something went wrong at repository layer");
+      throw { error };
+    }
+  }
 }
 
 module.exports = CrudRepository;

@@ -40,6 +40,17 @@ class CrudService {
       throw { error };
     }
   }
+
+  async getAll(data) {
+    try {
+      const filter = this.createFilter(data);
+      const response = await this.repository.getAll(filter);
+      return response;
+    } catch (error) {
+      console.log("something went wrong at service layer");
+      throw { error };
+    }
+  }
 }
 
 module.exports = CrudService;
