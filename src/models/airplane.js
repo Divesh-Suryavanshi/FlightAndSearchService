@@ -16,12 +16,11 @@ module.exports = (sequelize, DataTypes) => {
       modelNumber: {
         type: DataTypes.STRING,
         allowNull: false,
-        required: true,
+        unique: true,
       },
       capacity: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        required: true,
       },
     },
     {
