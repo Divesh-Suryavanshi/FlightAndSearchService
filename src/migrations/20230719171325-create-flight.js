@@ -11,11 +11,17 @@ module.exports = {
       },
       flightNumber: {
         allowNull: false,
+
         type: Sequelize.STRING,
         unique: true,
       },
       airplaneId: {
         allowNull: false,
+        references: {
+          model: "Airplane",
+          key: "id",
+          as: "airplaneId",
+        },
         type: Sequelize.INTEGER,
       },
       arrivalAirportId: {
