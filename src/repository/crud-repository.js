@@ -50,7 +50,9 @@ class CrudRepository {
 
   async getAll(filter) {
     try {
-      const response = await this.model.findAll(filter);
+      const response = await this.model.findAll({
+        where: filter,
+      });
       return response;
     } catch (error) {
       console.log("Something went wrong at repository layer");

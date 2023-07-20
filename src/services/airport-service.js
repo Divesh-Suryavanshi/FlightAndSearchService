@@ -11,20 +11,16 @@ class AirportService extends CrudService {
 
     if (data.name) {
       Object.assign(filter, {
-        where: {
-          name: {
-            [Op.startsWith]: data.name,
-          },
+        name: {
+          [Op.startsWith]: data.name,
         },
       });
     }
 
     if (data.cityId) {
       Object.assign(filter, {
-        where: {
-          cityId: {
-            [Op.eq]: data.cityId,
-          },
+        cityId: {
+          [Op.eq]: data.cityId,
         },
       });
     }

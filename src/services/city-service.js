@@ -11,10 +11,8 @@ class CityService extends CrudService {
 
     if (data.name) {
       Object.assign(filter, {
-        where: {
-          name: {
-            [Op.startsWith]: data.name,
-          },
+        name: {
+          [Op.startsWith]: data.name,
         },
       });
     }
