@@ -25,10 +25,20 @@ module.exports = {
       },
       arrivalAirportId: {
         allowNull: false,
+        references: {
+          model: "Airports",
+          key: "id",
+          as: "arrivalAirportId",
+        },
         type: Sequelize.INTEGER,
       },
       departureAirportId: {
         allowNull: false,
+        references: {
+          model: "Airports",
+          key: "id",
+          as: "departureAirportId",
+        },
         type: Sequelize.INTEGER,
       },
       arrivalTime: {
