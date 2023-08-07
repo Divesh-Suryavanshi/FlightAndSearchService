@@ -3,7 +3,7 @@ const service = new FlightService();
 
 const create = async (req, res) => {
   try {
-    const response = await service.create(req.body);
+    const city = await service.create(req.body);
     return res.status(201).json({
       data: city,
       success: true,

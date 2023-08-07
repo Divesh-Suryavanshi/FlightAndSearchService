@@ -1,4 +1,4 @@
-const { CrudService } = require("./index");
+const CrudService = require("./crud-service");
 const { FlightRepository } = require("../repository");
 
 const flight = new FlightRepository();

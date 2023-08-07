@@ -30,7 +30,7 @@ router.delete("/airports/:id", AirportController.destroy);
 router.get("/airports/:id", AirportController.get);
 router.get("/airports", AirportController.getAll);
 
-// FlightROutes
+// FlightRoutes
 router.post("/airports", FlightController.create);
 router.patch("/airports/:id", FlightController.update);
 router.get("/airports/:id", FlightController.get);
