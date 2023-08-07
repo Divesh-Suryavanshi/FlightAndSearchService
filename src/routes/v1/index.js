@@ -10,6 +10,7 @@ const {
   CityController,
   AirportController,
   FlightController,
+  AirplaneController,
 } = require("../../controllers");
 
 // swaggerDocs
@@ -29,6 +30,13 @@ router.patch("/airports/:id", AirportController.update);
 router.delete("/airports/:id", AirportController.destroy);
 router.get("/airports/:id", AirportController.get);
 router.get("/airports", AirportController.getAll);
+
+// airplaneRoutes
+router.post("/airplanes", AirplaneController.create);
+router.patch("/airplanes/:id", AirplaneController.update);
+router.delete("/airplanes/:id", AirplaneController.destroy);
+router.get("/airplanes/:id", AirplaneController.get);
+router.get("/airplanes", AirplaneController.getAll);
 
 // FlightRoutes
 router.post("/airports", FlightController.create);
